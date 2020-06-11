@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qb_px_0"
+        android:layout_weight="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextureView
+                android:id="@+id/ttv_preview_camera"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_120"
+            android:layout_gravity="top"
+            android:background="@color/filter_name_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/mv_notice_camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/qb_px_80"
+                android:layout_marginEnd="@dimen/qb_px_80"
+                app:mvAnimDuration="1000"
+                app:mvDirection="right_to_left"
+                app:mvInterval="3000"
+                app:mvSingleLine="true"
+                app:mvTextColor="@android:color/white"
+                app:mvTextSize="@dimen/qb_px_40" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/filter_name_background"
+            android:padding="@dimen/qb_px_10">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_take_photo_camera"
+                android:layout_width="@dimen/qb_px_160"
+                android:layout_height="@dimen/qb_px_160"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/qb_px_30"
+                android:background="@drawable/btn_round_ring" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_setting_camera"
+                android:layout_width="@dimen/qb_px_72"
+                android:layout_height="@dimen/qb_px_72"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/qb_px_50"
+                android:src="@drawable/ic_settings_white_72dp" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qb_px_0"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_ad_image_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ad_pic" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

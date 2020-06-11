@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/qb_px_500"
+    android:background="@drawable/rectangle_all_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/dialog_logo_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dialog_logo"
+            android:layout_width="@dimen/qb_px_120"
+            android:layout_height="@dimen/qb_px_120"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher_round" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/qb_px_15"
+            android:paddingEnd="@dimen/qb_px_15"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/qb_px_45"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/qb_px_25"
+            android:gravity="center"
+            android:paddingStart="@dimen/qb_px_25"
+            android:paddingEnd="@dimen/qb_px_25"
+            android:textColor="@color/light_gray"
+            android:textSize="@dimen/qb_px_35"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <com.mmga.metroloading.MetroLoadingView
+        android:id="@+id/dialog_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/qb_px_100"
+        android:layout_gravity="center_horizontal"
+        app:indicator="circle"
+        app:indicator_color="@color/dark_red" />
+
+</LinearLayout>

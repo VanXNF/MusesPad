@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_filter_container"
+    android:layout_width="@dimen/qb_px_200"
+    android:layout_height="@dimen/qb_px_200"
+    android:layout_margin="@dimen/qb_px_15"
+    app:cardCornerRadius="@dimen/qb_px_5"
+    app:cardElevation="@dimen/qb_px_1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/qb_px_5">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_filter_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_filter_name"
+            android:layout_alignParentBottom="true"
+            android:text="@string/filter_name"
+            style="@style/filter_title_text" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

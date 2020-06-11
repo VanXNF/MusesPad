@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/export_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ExportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qb_px_0"
+        android:layout_weight="3"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_120"
+            android:layout_gravity="top"
+            android:background="@android:color/white"
+            android:gravity="center">
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/mv_notice_export"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/qb_px_80"
+                android:layout_marginEnd="@dimen/qb_px_80"
+                app:mvAnimDuration="1000"
+                app:mvDirection="right_to_left"
+                app:mvInterval="3000"
+                app:mvSingleLine="true"
+                app:mvTextColor="@android:color/black"
+                app:mvTextSize="@dimen/qb_px_40" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_toolbar_export"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:elevation="@dimen/qb_px_5"
+            android:padding="@dimen/qb_px_25">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_toolbar_back_export"
+                style="@style/edit_toolbar_tip_text"
+                android:layout_alignParentStart="true"
+                android:text="@string/take_photo_again" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_toolbar_title_export"
+                style="@style/edit_toolbar_title_text"
+                android:text="@string/already_finished" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_content_container_export"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/qb_px_30">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_display_export"
+                android:layout_width="@dimen/qb_px_700"
+                android:layout_height="@dimen/qb_px_700"
+                android:layout_margin="@dimen/qb_px_10" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_size_info_export"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/qb_px_10"
+                android:gravity="center"
+                android:text="@string/size"
+                android:textSize="@dimen/qb_px_30" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_continue_editing_export"
+                android:layout_width="@dimen/qb_px_500"
+                android:layout_height="@dimen/qb_px_100"
+                android:layout_margin="@dimen/qb_px_10"
+                android:background="@drawable/btn_continue_editing_bg"
+                android:text="@string/continue_editing"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/qb_px_35" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_share_now_export"
+                android:layout_width="@dimen/qb_px_500"
+                android:layout_height="@dimen/qb_px_100"
+                android:layout_margin="@dimen/qb_px_10"
+                android:layout_marginBottom="@dimen/qb_px_30"
+                android:background="@drawable/btn_print_bg"
+                android:text="@string/share_now"
+                android:textSize="@dimen/qb_px_35" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qb_px_0"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_ad_image_export"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ad_pic" />
+
+    </LinearLayout>
+
+</LinearLayout>

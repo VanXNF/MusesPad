@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="edit_background">#EEEEEE</color>
+    <color name="export_background">@color/edit_background</color>
+    <color name="edit_tip_text">#61AAfA</color>
+    <color name="filter_name_background">#38000000</color>
+    <color name="filter_background">#FCCF2B</color>
+    <color name="seek_bar_background">#E9FFFFFF</color>
+    <color name="ic_launcher_background">#FC4E5B</color>
+    <color name="dark_red">#FFFF4013</color>
+    <color name="light_gray">#9e9e9e</color>
+</resources>
