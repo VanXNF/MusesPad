@@ -5,7 +5,8 @@
     <string name="edit_title">编辑</string>
     <string name="edit_finish">完成</string>
     <string name="filter_name">滤镜名称</string>
-    <string name="default_filter_intensity_value">100</string>
+    <string name="default_filter_intensity_value">255</string>
+    <string name="default_filter_tip">请点击选择滤镜</string>
 
     <string name="already_finished">已完成</string>
     <string name="take_photo_again">重新拍摄</string>
@@ -14,7 +15,7 @@
     <string name="print_now">即刻打印</string>
     <string name="share_now">即刻分享</string>
 
-    <string name="default_notice">欢迎体验 MUSES 风格迁移，请先连接 5 楼 WIFI，点按选择相应风格即可将其应用于所拍摄照片上，滑动滑条即可调整风格强度，祝您生活愉快</string>
+    <string name="default_notice">欢迎体验 MUSES 风格迁移，请点击相机按钮进行拍照，随后可选择相应风格即可将其应用于所拍摄照片上，滑动滑条即可调整风格强度，祝您生活愉快</string>
     <string name="please_wait_we_are_create_image_now">请稍等，正在为您创建图像</string>
     <string name="please_scan_to_download_image">请扫码获取图片</string>
     <string name="fail_to_get_code">获取二维码图片失败</string>

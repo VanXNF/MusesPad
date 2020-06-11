@@ -2,16 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_filter_container"
-    android:layout_width="@dimen/qb_px_200"
-    android:layout_height="@dimen/qb_px_200"
-    android:layout_margin="@dimen/qb_px_15"
-    app:cardCornerRadius="@dimen/qb_px_5"
-    app:cardElevation="@dimen/qb_px_1">
+    android:layout_width="@dimen/dp_60"
+    android:layout_height="@dimen/dp_60"
+    android:layout_margin="@dimen/dp_5"
+    app:cardCornerRadius="@dimen/dp_5"
+    app:cardElevation="@dimen/dp_1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/qb_px_5">
+        android:layout_margin="@dimen/dp_3">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_filter_image"

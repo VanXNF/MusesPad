@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.bumptech.glide.Glide
 import com.lxj.androidktx.core.loge
 import com.lxj.androidktx.core.post
 import com.lxj.androidktx.core.sp
@@ -32,6 +33,9 @@ import java.util.concurrent.TimeUnit
 
 class ExportActivity : AppCompatActivity() {
 
+    private val ivAd by lazy<AppCompatImageView> {
+        findViewById(R.id.iv_ad_image_export)
+    }
     private lateinit var image: AppCompatImageView
     private lateinit var bitmap: Bitmap
 
@@ -58,6 +62,12 @@ class ExportActivity : AppCompatActivity() {
             Log.d("muses_size", "image_width: $width image_height: $height")
             image.setImageBitmap(bitmap)
             findViewById<AppCompatTextView>(R.id.tv_size_info_export).text = "尺寸：$width x $height"
+        }
+
+        ivAd.post {
+            Glide.with(this@ExportActivity)
+                .load(getAddress("filter")+ FILTER_AD_SERVER)
+                .into(ivAd)
         }
 
         findViewById<AppCompatTextView>(R.id.tv_toolbar_back_export).setOnClickListener {
@@ -116,7 +126,7 @@ class ExportActivity : AppCompatActivity() {
         builder.setCancelable(true)
         val codeDialog = builder.create()
         val window: Window = codeDialog.window!!
-        window.setBackgroundDrawable(resources.getDrawable(R.drawable.rectangle_all_bg, null))
+        window.setBackgroundDrawable(resources.getDrawable(R.drawable.white_rectangle_bg, null))
         window.setGravity(Gravity.CENTER)
         return codeDialog
     }

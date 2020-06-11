@@ -2,62 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/qb_px_100"
-    android:background="@drawable/rectangle_all_bg"
+    android:layout_margin="@dimen/dp_10"
+    android:background="@drawable/white_rectangle_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="@dimen/qb_px_30">
+    android:padding="@dimen/dp_15">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_margin="@dimen/qb_px_20"
+        android:layout_marginTop="@dimen/dp_5"
         android:text="@string/web_address"
+        android:padding="@dimen/dp_5"
+        android:background="@drawable/line_rectangle_bg"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/qb_px_35" />
+        android:textSize="@dimen/sp_15" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_web_address_dialog"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/line_rectangle_bg"
         android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="@dimen/qb_px_20"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:background="@drawable/line_rectangle_bg"
         android:text="@string/filter_transfer_address"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/qb_px_35" />
+        android:textSize="@dimen/sp_15" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_filter_address_dialog"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/line_rectangle_bg"
         android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_restore_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/line_rectangle_bg"
             android:text="@string/restore" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_confirm_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/line_rectangle_bg"
             android:text="@string/confirm_edit" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cancel_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/line_rectangle_bg"
             android:text="@string/cancel" />
 
     </LinearLayout>

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.Environment
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -63,12 +65,23 @@ class EditActivity : AppCompatActivity() {
     private val flabBack by lazy<FloatingActionButton> {
         findViewById(R.id.flab_back_edit)
     }
-    private val filterSeekBar by lazy<SeekBar> {
+    private val tvFilterTip by lazy<AppCompatTextView> {
+        findViewById(R.id.tv_filter_tip_edit)
+    }
+    private val tvFilterIntensity by lazy<AppCompatTextView> {
+        findViewById(R.id.tv_filter_intensity_edit)
+    }
+    private val seekBarFilter by lazy<SeekBar> {
         findViewById(R.id.sb_filter_edit)
     }
     private val llAdjustContainer by lazy<LinearLayout> {
         findViewById(R.id.ll_adjust_container_edit)
     }
+    private val ivAd by lazy<AppCompatImageView> {
+        findViewById(R.id.iv_ad_image_edit)
+    }
+
+    private lateinit var cropPath: String
     private lateinit var bitmapO: Bitmap
     private lateinit var bitmapF: Bitmap
     private lateinit var bitmapE: Bitmap
@@ -78,11 +91,11 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         val bundle = this.intent.extras
 
-        val path: String
         if (bundle != null) {
-            path = bundle.get("Path").toString()
-            if (path != "") {
-                initView(path)
+            cropPath = bundle.get("Path").toString()
+//            Log.d("muses Pad", cropPath)
+            if (cropPath != "") {
+                initView(cropPath)
             }
         }
 
@@ -92,22 +105,6 @@ class EditActivity : AppCompatActivity() {
     private fun initView(path: String) {
 
         findViewById<MarqueeView<String>>(R.id.mv_notice_edit).startWithText(getString(R.string.default_notice))
-//        val mWindowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-//        val metrics = DisplayMetrics()
-//        mWindowManager.defaultDisplay.getMetrics(metrics)
-//        val wWidth = metrics.widthPixels
-//        val wHeight = metrics.heightPixels
-
-//        val imageSize = if (wWidth >= wHeight) wHeight else wWidth
-//        val params = LinearLayout.LayoutParams(
-//            imageSize,
-//            imageSize
-//        )
-
-//        val parent = image.parent as ViewGroup
-//        parent.removeView(image)
-//        image.layoutParams = params
-//        parent.addView(image, 0)
 
         val loadingDialog = initLoadingDialog()
 
@@ -120,15 +117,20 @@ class EditActivity : AppCompatActivity() {
             image.setImageBitmap(bitmapO)
         }
 
+        ivAd.post {
+            Glide.with(this@EditActivity)
+                .load(getAddress("filter")+ FILTER_AD_SERVER)
+                .into(ivAd)
+        }
+
+
         findViewById<AppCompatTextView>(R.id.tv_toolbar_back_edit).setOnClickListener {
             finish()
         }
 
         findViewById<AppCompatTextView>(R.id.tv_toolbar_finish_edit).setOnClickListener {
-            val file = File(
-                externalMediaDirs.first(),
-                "muses.jpg"
-            )
+            val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/MusesPad")
+            val file = File(storageDir, "Muses.jpg")
             try {
                 val out = FileOutputStream(file)
                 bitmapE.compress(Bitmap.CompressFormat.JPEG, 100, out)
@@ -150,11 +152,11 @@ class EditActivity : AppCompatActivity() {
                 recyclerClass.visibility = View.VISIBLE
                 recyclerData.visibility = View.GONE
                 flabBack.visibility = View.GONE
-                llAdjustContainer.visibility = View.GONE
+                tvFilterTip.visibility = View.VISIBLE
+                tvFilterIntensity.visibility = View.GONE
+                seekBarFilter.visibility = View.GONE
             }
         }
-
-
 
         recyclerClass
             .horizontal(0)
@@ -196,10 +198,7 @@ class EditActivity : AppCompatActivity() {
                     .into(imageView)
             }.itemClick<FilterData> { data, holder, position ->
                 post { loadingDialog.show() }
-                val file = File(
-                    externalMediaDirs.first(),
-                    "muses.jpg"
-                )
+                val file = File(cropPath)
                 val request = (getAddress("filter") + FILTER_TRANSFER_SERVER).http()
                     .headers(Pair("Content-Type", "multipart/form-data"))
                     .params(
@@ -219,6 +218,7 @@ class EditActivity : AppCompatActivity() {
                             toast("网络异常，请稍后再试")
                             loadingDialog.dismiss()
                         }
+                        e.printStackTrace()
                     }
 
                     override fun onResponse(call: Call, response: Response) {
@@ -228,7 +228,8 @@ class EditActivity : AppCompatActivity() {
                         val url = jsonObject.getString("image")
                         Glide.with(this@EditActivity)
                             .asBitmap()
-                            .load(url)
+                            .load(getAddress("filter") + "/$url")
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .listener(object : RequestListener<Bitmap> {
                                 override fun onResourceReady(
                                     resource: Bitmap?,
@@ -239,8 +240,10 @@ class EditActivity : AppCompatActivity() {
                                 ): Boolean {
                                     bitmapF = resource!!
                                     post {
-                                        llAdjustContainer.visibility = View.VISIBLE
-                                        bitmapE = tweakStyleIntensity(filterSeekBar.progress)
+                                        tvFilterTip.visibility = View.GONE
+                                        tvFilterIntensity.visibility = View.VISIBLE
+                                        seekBarFilter.visibility = View.VISIBLE
+                                        bitmapE = tweakStyleIntensity(seekBarFilter.progress)
                                         loadingDialog.dismiss()
                                         image.setImageBitmap(bitmapE)
                                     }
@@ -270,17 +273,19 @@ class EditActivity : AppCompatActivity() {
             override fun onSuccess(t: String) {
                 logd("get filter class list success")
                 val result =
-                    Gson().fromJson<FilterClassEntity>(t, FilterClassEntity::class.java).data
+                    Gson().fromJson(t, FilterClassEntity::class.java).data
                 post {
                     recyclerClass.visibility = View.VISIBLE
                     recyclerData.visibility = View.GONE
-                    llAdjustContainer.visibility = View.GONE
+                    tvFilterTip.visibility = View.VISIBLE
+                    tvFilterIntensity.visibility = View.GONE
+                    seekBarFilter.visibility = View.GONE
                     recyclerClass.updateData(result)
                 }
             }
         })
 
-        filterSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        seekBarFilter.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 post {
                     findViewById<AppCompatTextView>(R.id.tv_filter_intensity_edit).text =
@@ -338,7 +343,7 @@ class EditActivity : AppCompatActivity() {
         txtTitle.setText(R.string.please_wait_we_are_create_image_now)
         val loadingDialog = builder.create()
         val window: Window = loadingDialog.window!!
-        window.setBackgroundDrawable(resources.getDrawable(R.drawable.rectangle_all_bg, null))
+        window.setBackgroundDrawable(resources.getDrawable(R.drawable.white_rectangle_bg, null))
         window.setGravity(Gravity.CENTER)
         loadingDialog.setOnShowListener { loadingView.start() }
         loadingDialog.setOnDismissListener { loadingView.stop() }
