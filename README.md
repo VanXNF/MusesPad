@@ -4,3 +4,7 @@
 
 目前更新至 v1.1.0，本版本虽名为 Muses Pad，但同样对各类机型屏幕尺寸做了一定适配，欢迎下载体验。
 
+### 注
+
+本应用依赖于后端服务器，如需使用本应用，请按 [MusesSpring](https://github.com/MusesArt/MusesSpring) 搭建WEB 服务端以及按 [MusesStyle](https://github.com/czczup/MusesStyle) 搭建 GPU 服务端。
+
